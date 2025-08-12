@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ankit Gupta — Cloud & DevOps Portfolio</title>
+  <meta name="description" content="Portfolio of Ankit Gupta — AWS Cloud Architect & DevOps Engineer" />
+  <style>
+    :root{
+      --bg:#070a12;--ink:#eaf1ff;--muted:#9db0ca;--card:#0e1423;--edge:#1e2638;
+      --brand:#61dafb;--accent:#a78bfa;--ok:#34d399;--warn:#f59e0b;--danger:#ef4444;
+      --shadow:0 14px 36px rgba(0,0,0,.4)
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;color:var(--ink);
+      background:
+        radial-gradient(900px 500px at 10% -10%, #162033 0%, transparent 60%),
+        radial-gradient(900px 600px at 110% 0%, #1a2438 0%, transparent 60%),
+        linear-gradient(180deg,#0b0f18,#070a12 40%)}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1200px;margin:0 auto;padding:24px}
+
+    /* NAV */
+    header{position:sticky;top:0;z-index:50;background:linear-gradient(to bottom,rgba(7,10,18,.9),rgba(7,10,18,.6),transparent);backdrop-filter:saturate(120%) blur(8px)}
+    .nav{display:flex;align-items:center;justify-content:space-between}
+    .left{display:flex;align-items:center;gap:14px}
+    .avatar{width:56px;height:56px;border-radius:14px;overflow:hidden;border:1px solid var(--edge);box-shadow:var(--shadow)}
+    .avatar img{width:100%;height:100%;object-fit:cover}
+    .tagline{color:var(--muted)}
+    .links a{margin-left:10px;border:1px solid var(--edge);padding:8px 12px;border-radius:10px;background:#0c1322}
+    .links a:hover{background:#111a2e}
+    .theme{margin-left:10px;border:1px solid var(--edge);padding:8px 12px;border-radius:10px;background:#0c1322;cursor:pointer}
+
+    /* HERO */
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:center;margin-top:12px}
+    .card{background:linear-gradient(180deg,var(--card),#0c1322);border:1px solid var(--edge);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;font-weight:700;border:1px solid var(--edge);background:#0e172b}
+    .btn:hover{transform:translateY(-1px);filter:brightness(1.08)}
+    .cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .resume{background:var(--brand);color:#05141e;border-color:transparent}
+    .github{background:#121a2c}
+    .type{font-weight:900;letter-spacing:.5px}
+    .cursor{display:inline-block;width:12px;height:1.05em;vertical-align:-.2em;background:#78e7ff;margin-left:4px;animation:blink 1s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+
+    /* SERVICES */
+    .section{margin-top:42px}
+    h2{margin:0 0 12px}
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .service .title{font-weight:700;margin:0 0 4px}
+
+    /* SKILLS */
+    .skills{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .badge{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;border:1px solid var(--edge);background:#0b1222;margin:4px 6px 0 0;font-size:13px;color:#d6e2f8}
+    .divider{height:1px;background:var(--edge);margin:16px 0}
+
+    /* PROJECTS */
+    .projects-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .filters{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{padding:6px 10px;border-radius:999px;border:1px solid var(--edge);background:#0b1222;cursor:pointer}
+    .chip.active{background:#1a2644}
+    .projects{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .proj{grid-column:span 6;border:1px solid var(--edge);border-radius:16px;background:linear-gradient(180deg,#0f1629,#0e1422);padding:16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .proj h3{margin:0}
+    .meta{color:var(--muted);font-size:13px;margin-top:2px}
+    .chips{margin-top:8px}
+    .chips .badge{background:#0f1830}
+    .proj .actions{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+    .stat{font-size:12px;color:#cde3ff;border:1px solid var(--edge);padding:2px 8px;border-radius:999px}
+    .proj[data-tag]{transition:transform .2s ease,opacity .2s ease}
+    .proj:hover{transform:translateY(-3px)}
+
+    /* EXPERIENCE (collapsed by default) */
+    details{border:1px solid var(--edge);border-radius:14px;padding:14px;background:#0e1526}
+    summary{cursor:pointer;font-weight:700}
+
+    footer{color:var(--muted);padding:28px 0;border-top:1px solid var(--edge);margin-top:34px;text-align:center}
+
+    @media (max-width: 1080px){
+      .hero{grid-template-columns:1fr}
+      .services{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 720px){
+      .skills{grid-template-columns:repeat(2,1fr)}
+      .projects .proj{grid-column:span 12}
+      .services{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="left">
+        <div class="avatar"><img src="profile.png" alt="Ankit Gupta"/></div>
+        <div>
+          <div style="font-weight:800;font-size:18px">Ankit Gupta</div>
+          <div class="tagline">AWS Cloud Architect • DevOps Engineer</div>
+        </div>
+      </div>
+      <div class="links">
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a href="mailto:ankitgup.05@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/ankit--gupta/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/Rajeshgupta123456789" target="_blank" rel="noopener">GitHub</a>
+        <button id="theme" class="theme" aria-label="Toggle theme">☾</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="card">
+        <h1 style="margin:0 0 8px;font-size:36px">
+          <span class="type" id="type">Designing cloud platforms</span><span class="cursor" aria-hidden="true"></span>
+        </h1>
+        <p class="tagline">6+ years building secure, observable, automated platforms on AWS with Terraform, Kubernetes and CI/CD.</p>
+        <div class="cta">
+          <a class="btn resume" href="Ankit-Gupta-Cloud-DevOps-Resume_.pdf" download>⬇ Download Resume</a>
+          <a class="btn github" href="https://github.com/Rajeshgupta123456789" target="_blank" rel="noopener">🐙 View GitHub</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Highlights</h3>
+        <ul style="margin:8px 0 0 18px">
+          <li>Production EKS with Helm, autoscaling, GitOps-ready delivery.</li>
+          <li>Modular Terraform for VPC, EKS, RDS (private), S3, CloudFront, Lambda.</li>
+          <li>Secure pipelines: SonarQube • Trivy • OWASP Dependency‑Check.</li>
+          <li>Observability with Prometheus, Grafana, CloudWatch, New Relic.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section">
+      <h2>Services</h2>
+      <div class="services">
+        <div class="card service">
+          <div class="title">Cloud Architecture on AWS</div>
+          <div class="tagline">Well‑Architected, scalable VPCs, private RDS, secure networking.</div>
+        </div>
+        <div class="card service">
+          <div class="title">Kubernetes Platforms</div>
+          <div class="tagline">EKS clusters, Helm, autoscaling, GitOps pipelines, observability.</div>
+        </div>
+        <div class="card service">
+          <div class="title">CI/CD & DevSecOps</div>
+          <div class="tagline">Jenkins/GitLab/CodePipeline with scans, policies, and releases.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS (compact, website-like) -->
+    <section class="section" id="skills">
+      <h2>Tech I use</h2>
+      <div class="skills">
+        <div class="card">
+          <h3>Cloud</h3>
+          <span class="badge">AWS</span>
+          <span class="badge">GCP</span>
+          <span class="badge">Orange Flexible Engine</span>
+        </div>
+        <div class="card">
+          <h3>IaC & Automation</h3>
+          <span class="badge">Terraform</span>
+          <span class="badge">CDK (TS)</span>
+          <span class="badge">Ansible</span>
+          <span class="badge">Bash/Python</span>
+        </div>
+        <div class="card">
+          <h3>Containers & K8s</h3>
+          <span class="badge">Docker</span>
+          <span class="badge">EKS</span>
+          <span class="badge">GKE</span>
+          <span class="badge">Helm</span>
+        </div>
+        <div class="card">
+          <h3>CI/CD & Security</h3>
+          <span class="badge">Jenkins</span>
+          <span class="badge">GitLab CI</span>
+          <span class="badge">Argo CD</span>
+          <span class="badge">CodePipeline</span>
+          <span class="badge">SonarQube</span>
+          <span class="badge">Trivy</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div>
+        <span class="badge">VPC</span>
+        <span class="badge">IGW/NAT/TGW</span>
+        <span class="badge">WAF</span>
+        <span class="badge">CloudFront</span>
+        <span class="badge">RDS (Postgres)</span>
+        <span class="badge">Redis</span>
+        <span class="badge">Kafka/MSK</span>
+        <span class="badge">SNS/SQS/EventBridge</span>
+        <span class="badge">Grafana</span>
+        <span class="badge">Prometheus</span>
+        <span class="badge">CloudWatch</span>
+        <span class="badge">ServiceNow</span>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE collapsed to keep website feel -->
+    <section class="section" id="experience">
+      <h2>Experience</h2>
+      <details>
+        <summary>Cloud / DevOps Engineer — Valiantys (Toronto • 06/2020 – 07/2025)</summary>
+        <ul>
+          <li>Zero‑downtime releases; 2 weeks → 2 days cycle time.</li>
+          <li>Containerized 15+ apps on ECS/EKS; ~60% faster deploys.</li>
+          <li>Terraform/CDK/Ansible for dev→prod; 85% fewer manual errors.</li>
+          <li>25+ migrations aligned to Well‑Architected; 20–30% cost savings.</li>
+        </ul>
+      </details>
+      <details>
+        <summary>IT Technical Support — Concordia University (Montreal • 07/2019 – 09/2019)</summary>
+        <div class="tagline">Front‑line support; ServiceNow; AD; network troubleshooting.</div>
+      </details>
+      <details>
+        <summary>Jr. DevOps Engineer — IT DUDE TECH SOLUTION (Mumbai • 05/2016 – 06/2017)</summary>
+        <div class="tagline">Built CI/CD pipelines and automation; improved availability.</div>
+      </details>
+    </section>
+
+    <!-- PROJECTS with filters and dynamic GitHub stats -->
+    <section class="section" id="projects">
+      <div class="projects-head">
+        <h2>Projects</h2>
+        <div class="filters">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="kubernetes">Kubernetes</button>
+          <button class="chip" data-filter="security">Security</button>
+          <button class="chip" data-filter="web">Web</button>
+        </div>
+      </div>
+
+      <div class="projects" id="grid">
+        <article class="proj" data-tag="kubernetes">
+          <h3>📺 VideoTube — YouTube‑style Video Platform</h3>
+          <div class="meta">React • Node.js • EKS • Terraform • RDS (private) • S3 • CloudFront • Lambda • Redis • Jenkins • Prometheus/Grafana</div>
+          <div class="chips">
+            <span class="badge">Helm deploys</span>
+            <span class="badge">Auth uploads</span>
+            <span class="badge">FFmpeg ready</span>
+            <span class="badge">GitOps‑friendly</span>
+          </div>
+          <ul>
+            <li>Provisioned full AWS infra with modular Terraform (VPC, EKS, RDS in private subnets, S3, CloudFront, Lambda for presigned URLs).</li>
+            <li>Jenkins pipeline builds images, runs security scans, and deploys via Helm.</li>
+            <li>Prometheus & Grafana dashboards + CloudWatch logs/metrics.</li>
+          </ul>
+          <div class="actions">
+            <span class="stat" id="stat-Videotube">★ – • ⑂ –</span>
+            <a class="btn" href="https://github.com/Rajeshgupta123456789/Videotube" target="_blank" rel="noopener">View code ↗</a>
+          </div>
+        </article>
+
+        <article class="proj" data-tag="security">
+          <h3>🛡️ vuln-hawk — Python Security Scanner</h3>
+          <div class="meta">Python • IaC (Terraform) • Dockerfile analysis • AWS checks • JSON reports</div>
+          <div class="chips">
+            <span class="badge">Secrets scan</span>
+            <span class="badge">CVE insights</span>
+            <span class="badge">CI ready</span>
+          </div>
+          <ul>
+            <li>Scans for secrets, AWS misconfigs, Terraform and Dockerfile issues with clear, actionable output.</li>
+            <li>CI‑friendly JSON artifacts & exit codes for dashboards.</li>
+          </ul>
+          <div class="actions">
+            <span class="stat" id="stat-vulnerabilityscanner">★ – • ⑂ –</span>
+            <a class="btn" href="https://github.com/Rajeshgupta123456789/vulnerabilityscanner" target="_blank" rel="noopener">View code ↗</a>
+          </div>
+        </article>
+
+        <article class="proj" data-tag="web">
+          <h3>✈️ Travel Blog — Static Site</h3>
+          <div class="meta">Static HTML/CSS/JS • GitHub Pages/Netlify • Image gallery</div>
+          <div class="chips">
+            <span class="badge">Responsive</span>
+            <span class="badge">CDN‑friendly</span>
+          </div>
+          <ul>
+            <li>Lightweight static blog structure optimized for CDN delivery and fast loads.</li>
+            <li>Easy content updates; deployable on GitHub Pages or Netlify.</li>
+          </ul>
+          <div class="actions">
+            <span class="stat" id="stat-travelblog-project">★ – • ⑂ –</span>
+            <a class="btn" href="https://github.com/Rajeshgupta123456789/travelblog-project" target="_blank" rel="noopener">View code ↗</a>
+          </div>
+        </article>
+
+        <article class="proj" data-tag="web">
+          <h3>🛒 Online Shopping App</h3>
+          <div class="meta">Node/React (or similar) • Docker • CI‑ready</div>
+          <div class="chips">
+            <span class="badge">Containers</span>
+            <span class="badge">Env configs</span>
+          </div>
+          <ul>
+            <li>Sample e‑commerce flow with containerized services and parameterized environments.</li>
+          </ul>
+          <div class="actions">
+            <span class="stat" id="stat-online-shopping-app">★ – • ⑂ –</span>
+            <a class="btn" href="https://github.com/Rajeshgupta123456789/online-shopping-app" target="_blank" rel="noopener">View code ↗</a>
+          </div>
+        </article>
+
+        <article class="proj" data-tag="kubernetes">
+          <h3>⚙️ EKS Auto Mode</h3>
+          <div class="meta">EKS • Autoscaling • Cost‑aware settings • IaC</div>
+          <div class="chips">
+            <span class="badge">Karpenter/ASG</span>
+            <span class="badge">Right‑sizing</span>
+            <span class="badge">Workload profiles</span>
+          </div>
+          <ul>
+            <li>Automates EKS node provisioning and scaling strategies for mixed workloads.</li>
+            <li>IaC patterns to toggle capacity types and instance families safely.</li>
+          </ul>
+          <div class="actions">
+            <span class="stat" id="stat-EKS-Auto-Mode">★ – • ⑂ –</span>
+            <a class="btn" href="https://github.com/Rajeshgupta123456789/EKS-Auto-Mode" target="_blank" rel="noopener">View code ↗</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <h2>Contact</h2>
+      <div class="card">
+        <p class="tagline">Based in Toronto. Open to roles, consulting and collaborations.</p>
+        <div class="cta">
+          <a class="btn" href="mailto:ankitgup.05@gmail.com">✉️ Email</a>
+          <a class="btn" href="Ankit-Gupta-Cloud-DevOps-Resume_.pdf" download>⬇ Resume PDF</a>
+          <a class="btn" href="https://www.linkedin.com/in/ankit--gupta/" target="_blank" rel="noopener">🔗 LinkedIn</a>
+          <a class="btn" href="https://github.com/Rajeshgupta123456789" target="_blank" rel="noopener">🐙 GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Ankit Gupta • Toronto • <a href="mailto:ankitgup.05@gmail.com">ankitgup.05@gmail.com</a>
+    </footer>
+  </main>
+
+  <script>
+    // Current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme toggle using invert filter (simple, no extra CSS)
+    const themeBtn = document.getElementById('theme');
+    const saved = localStorage.getItem('theme');
+    if(saved==='light') document.documentElement.style.filter='invert(1) hue-rotate(180deg)';
+    themeBtn.addEventListener('click',()=>{
+      const on = document.documentElement.style.filter.includes('invert');
+      document.documentElement.style.filter = on ? '' : 'invert(1) hue-rotate(180deg)';
+      localStorage.setItem('theme', on ? 'dark' : 'light');
+      themeBtn.textContent = on ? '☾' : '☀';
+    });
+
+    // Typing effect for hero title
+    const phrases=[
+      'Designing cloud platforms',
+      'Building production‑grade EKS',
+      'Automating with Terraform & CDK',
+      'Shipping fast with secure CI/CD'
+    ];
+    let i=0, j=0, deleting=false; const el=document.getElementById('type');
+    function tick(){
+      const full=phrases[i];
+      el.textContent = deleting ? full.slice(0,--j) : full.slice(0,++j);
+      if(!deleting && j===full.length){deleting=true; setTimeout(tick,1100); return}
+      if(deleting && j===0){deleting=false; i=(i+1)%phrases.length}
+      setTimeout(tick, deleting?40:65);
+    } setTimeout(tick,600);
+
+    // Project filters
+    const chips=[...document.querySelectorAll('.chip')];
+    const cards=[...document.querySelectorAll('.proj')];
+    chips.forEach(c=>c.addEventListener('click',()=>{
+      chips.forEach(x=>x.classList.remove('active')); c.classList.add('active');
+      const tag=c.dataset.filter; cards.forEach(k=>{
+        if(tag==='all'||k.dataset.tag===tag){k.style.opacity=1; k.style.pointerEvents='auto'; k.style.transform='translateY(0)'}
+        else{k.style.opacity=.25; k.style.pointerEvents='none'; k.style.transform='scale(.99)'}
+      })
+    }))
+
+    // GitHub stars/forks (public API, no token). Works on GitHub Pages.
+    const repos={
+      'Videotube':'stat-Videotube',
+      'vulnerabilityscanner':'stat-vulnerabilityscanner',
+      'travelblog-project':'stat-travelblog-project',
+      'online-shopping-app':'stat-online-shopping-app',
+      'EKS-Auto-Mode':'stat-EKS-Auto-Mode'
+    };
+    Object.entries(repos).forEach(([name, id])=>{
+      fetch(`https://api.github.com/repos/Rajeshgupta123456789/${name}`)
+        .then(r=>r.ok?r.json():null).then(d=>{
+          if(!d) return; const el=document.getElementById(id);
+          if(el) el.textContent = `★ ${d.stargazers_count} • ⑂ ${d.forks_count}`;
+        }).catch(()=>{})
+    })
+  </script>
+</body>
+</html>
